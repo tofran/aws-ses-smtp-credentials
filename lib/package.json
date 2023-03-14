@@ -8,7 +8,7 @@
     "build": "tsc"
   },
   "files": [
-    "lib/**/*"
+    "dist"
   ],
   "repository": {
     "type": "git",
@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/tofran/aws-ses-smtp-credentials/issues"
   },
-  "homepage": "https://github.com/tofran/aws-ses-smtp-credentials#readme",
+  "homepage": "https://github.com/tofran/aws-ses-smtp-credentials",
   "devDependencies": {
     "@types/crypto-js": "^4.1.1",
     "@types/jest": "^29.4.1",
