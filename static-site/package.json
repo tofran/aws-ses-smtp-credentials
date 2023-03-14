@@ -30,7 +30,6 @@
   },
   "type": "module",
   "dependencies": {
-    "aws-ses-smtp-credentials": "file:../lib",
-    "crypto-js": "^4.1.1"
+    "aws-ses-smtp-credentials": "file:../lib"
   }
 }
