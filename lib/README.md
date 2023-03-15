@@ -21,8 +21,3 @@ getSESSmtpPassword(
     'eu-central-1'
 )
 ```
-
-## TODO
-
-FIXME: The exported bundle should contain the dependencies. As of right now you
-need to install `crypto-js` separately.

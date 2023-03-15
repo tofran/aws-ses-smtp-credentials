@@ -15,7 +15,7 @@ on:
 
 jobs:
   build-and-publish:
-    name: Publish
+    name: Build and publish
     runs-on: ubuntu-latest
     timeout-minutes: 10
     concurrency: build-and-publish
@@ -27,24 +27,12 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version-file: '.nvmrc'
-          cache: npm
+          node-version-file: ./lib/.nvmrc
 
       - run: npm ci --no-fund --prefer-offline --no-audit
 
-      - name: Cache node modules
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
       - name: Set version in package.json
+        if: github.event_name == 'release'
         run: npm version --no-git-tag-version "${{ github.ref_name }}"
 
       - run: npm run build
