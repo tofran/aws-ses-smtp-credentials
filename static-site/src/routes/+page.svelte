@@ -26,9 +26,17 @@
   let secretAccessKey: string | undefined
   let smtpPassword: string | undefined
 
+  let copyButtonContent = 'Copy'
+
   const copySmtpPasswordToClipboard = () => {
     if (smtpPassword) {
-      navigator.clipboard.writeText(smtpPassword)
+      navigator.clipboard.writeText(smtpPassword).then(() => {
+        copyButtonContent = 'Copied!'
+
+        setTimeout(() => {
+          copyButtonContent = 'Copy'
+        }, 1000)
+      })
     }
   }
 
@@ -39,62 +47,75 @@
   }
 </script>
 
-<h1>AWS SES SMTP password generator</h1>
+<h1>AWS SES SMTP Password Generator</h1>
 
 <p class="mt-2 text-sm text-slate-400">
-  Convert AWS Secret Access Keys into AWS SES (Simple Email Service) passwords.
-  This tool is 100% browser code, no requests are made to servers or third
-  parties. This page can be saved (<kbd>Ctrl</kbd> + <kbd>S</kbd>) and used
-  offline. Grab the source code from the
+  Convert AWS Secret Access Keys into AWS SES (Simple Email Service) SMTP
+  passwords. This tool is 100% browser code, no requests are made to servers or
+  third parties. This page can be saved (<kbd>Ctrl</kbd> + <kbd>S</kbd>) and
+  used offline. Grab the source code from the
   <a href="https://github.com/tofran/aws-ses-smtp-credentials">
     github repository
   </a>
   .
 </p>
 
-<label>
-  Region:
-  <select
-    name="region"
-    bind:value={region}
-    class="form-input px-4 py-3 rounded"
-  >
-    {#each Object.entries(AWS_SES_SMTP_REGIONS) as [id, name]}
-      <option value={id}>{id}: {name}</option>
-    {/each}
-  </select>
-</label>
+<label for="region-input">Region:</label>
+<select
+  id="region-input"
+  bind:value={region}
+  class="form-input px-4 py-3 rounded"
+>
+  {#each Object.entries(AWS_SES_SMTP_REGIONS) as [id, name]}
+    <option value={id}>{id}: {name}</option>
+  {/each}
+</select>
 
-<label>
-  Secret access key:
-  <input
-    type="text"
-    bind:value={secretAccessKey}
-    class="form-input px-4 py-3 rounded"
-  />
-</label>
+<label for="secret-access-key-input"> Secret access key:</label>
+<textarea
+  id="secret-access-key-input"
+  bind:value={secretAccessKey}
+  class="form-input px-4 py-3 rounded"
+/>
 
 {#if smtpPassword}
-  <label>
-    Result:
-    <input readonly value={smtpPassword} />
-    <button on:click={copySmtpPasswordToClipboard}>Copy</button>
-  </label>
+  <label for="result-input">Result:</label>
+  <textarea id="result-input" readonly value={smtpPassword} />
+  <button on:click={copySmtpPasswordToClipboard}>{copyButtonContent}</button>
 {/if}
 
 <style>
-  main {
-    color: rgb(30 41 59);
+  label {
+    margin: 1em 0 0 0;
+    display: block;
+    padding-left: 0.2em;
   }
 
-  input,
-  select {
+  select,
+  textarea {
     padding: 0.3em;
     margin-left: 0.2em;
-    width: 28em;
+    resize: none;
+  }
+
+  select {
+    width: 100%;
+  }
+
+  textarea {
+    width: calc(100% - 1em);
+    height: 2.5em;
+  }
+
+  #result-input {
+    width: calc(100% - 6.7em);
   }
 
   button {
+    inline-size: min-content;
     padding: 0.3em;
+    width: 5em;
+    height: 3.3em;
+    vertical-align: top;
   }
 </style>

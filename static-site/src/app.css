@@ -5,13 +5,8 @@ body {
   line-height: 1.4em;
 }
 
-a:visited {
+a {
   color: antiquewhite;
-}
-
-label {
-  margin: 1em 0;
-  display: block;
 }
 
 kbd {
