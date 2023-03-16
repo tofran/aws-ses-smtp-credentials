@@ -47,6 +47,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>AWS SES SMTP Password Generator</title>
+</svelte:head>
+
 <h1>AWS SES SMTP Password Generator</h1>
 
 <p class="mt-2 text-sm text-slate-400">
