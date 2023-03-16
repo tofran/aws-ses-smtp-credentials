@@ -1,4 +1,4 @@
-import{S as F,i as I,s as O,C as S,k as m,a as k,q as $,l as p,m as v,h as _,c as w,r as E,n as y,b as G,D as o,E as L,F as M,G as N,g as R,d as T}from"../chunks/index.56653d3e.js";function V(r){let t,n,d,a,c,i,g,b,f,z,u;const A=r[1].default,s=S(A,r,r[0],null);return{c(){t=m("div"),n=m("main"),s&&s.c(),d=k(),a=m("footer"),c=$("by "),i=m("a"),g=$("tofran"),b=$(`
+import{S as F,i as I,s as O,C as S,k as m,a as k,q as $,l as p,m as v,h as _,c as w,r as E,n as y,b as G,D as o,E as L,F as M,G as N,g as R,d as T}from"../chunks/index.f33f5d13.js";function V(r){let t,n,d,a,c,i,g,b,f,z,u;const A=r[1].default,s=S(A,r,r[0],null);return{c(){t=m("div"),n=m("main"),s&&s.c(),d=k(),a=m("footer"),c=$("by "),i=m("a"),g=$("tofran"),b=$(`
     ⭐️
     `),f=m("a"),z=$("source code"),this.h()},l(e){t=p(e,"DIV",{class:!0});var l=v(t);n=p(l,"MAIN",{class:!0});var q=v(n);s&&s.l(q),q.forEach(_),d=w(l),a=p(l,"FOOTER",{class:!0});var h=v(a);c=E(h,"by "),i=p(h,"A",{href:!0});var C=v(i);g=E(C,"tofran"),C.forEach(_),b=E(h,`
     ⭐️
