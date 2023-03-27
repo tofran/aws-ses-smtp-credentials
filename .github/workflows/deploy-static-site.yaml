@@ -7,12 +7,21 @@ on:
   pull_request:
   workflow_dispatch:
 
+concurrency:
+  group: "github-pages"
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     name: Build and deploy
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     permissions:
-      contents: write
+      contents: read
+      pages: write
+      id-token: write
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     defaults:
@@ -25,18 +34,22 @@ jobs:
         with:
           node-version-file: ./static-site/.nvmrc
 
-      - name: install lib dependencies
+      - name: Install lib dependencies
         working-directory: ./lib
         run: npm ci --no-fund --prefer-offline --no-audit
 
-      - name: install static-site dependencies
+      - name: Install static-site dependencies
         run: npm ci --no-fund --prefer-offline --no-audit
 
       - run: npm run build
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v1
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./static-site/build
+          path: ./static-site/build
+
+      - name: Deploy site
+        uses: actions/deploy-pages@v2
+        id: deployment
+        if: ${{ github.ref == 'refs/heads/main' }}
